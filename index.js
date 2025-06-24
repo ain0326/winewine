@@ -8,6 +8,16 @@ const API_KEY = 'app-9iqdLrxUu7tGS3BP9fz4xqqc';
 
 app.use(express.json());
 
+const express = require('express');
+const axios = require('axios');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+const API_URL = 'https://gateway.ax.gsretail.com/ext/v1';
+const API_KEY = 'app-9iqdLrxUu7tGS3BP9fz4xqqc';
+
+app.use(express.json());
+
 app.post('/recommend', async (req, res) => {
   try {
     // 1. 입력값 검사
