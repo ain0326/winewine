@@ -8,6 +8,10 @@ app.post('/recommend', async (req, res) => {
   try {
     const userInput = req.body.message;
 
+    if (!userInput) {
+      return res.status(400).json({ error: 'message 값이 없습니다.' });
+    }
+
     const response = await axios.post('https://gateway.ax.gsretail.com/ext/v1', {
       prompt: userInput
     }, {
@@ -18,10 +22,9 @@ app.post('/recommend', async (req, res) => {
 
     res.json(response.data);
   } catch (err) {
-    console.error(err.response?.data || err.message);
+    console.error('[API 오류]', err.response?.data || err.message);
     res.status(500).json({ error: 'Internal API 호출 실패' });
   }
 });
 
 app.listen(3000, () => console.log('Proxy server running on port 3000'));
-
