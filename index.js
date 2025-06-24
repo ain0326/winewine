@@ -11,35 +11,30 @@ app.use(express.json());
 app.post('/recommend', async (req, res) => {
   try {
     const userInput = req.body.message;
+
     if (!userInput) {
-      return res.status(400).json({ error: '요청에 "message" 값이 필요합니다.' });
+      return res.status(400).json({ error: '"message" 항목이 필요합니다.' });
     }
 
     const response = await axios.post(API_URL, {
-      prompt: userInput
+      prompt: userInput // ⚠️ 회사 API가 요구하는 키가 "prompt"가 맞는지 확인
     }, {
       headers: {
-        'Authorization': `Bearer ${app-9iqdLrxUu7tGS3BP9fz4xqqc}`,
+        Authorization: `Bearer ${API_KEY}`,
         'Content-Type': 'application/json'
       }
     });
 
     res.json(response.data);
-
   } catch (err) {
-    console.error('📛 에러 발생:', err.response?.data || err.message);
-
-    if (err.response) {
-      return res.status(err.response.status).json({
-        error: '회사 API 오류',
-        details: err.response.data
-      });
-    }
-
-    res.status(500).json({ error: '서버 오류 또는 회사 API 호출 실패' });
+    console.error('⛔ API 호출 오류:', err.response?.data || err.message);
+    res.status(500).json({
+      error: '회사 API 호출 실패',
+      details: err.response?.data || '알 수 없는 오류'
+    });
   }
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 프록시 서버 실행 중: http://localhost:${PORT}`);
+  console.log(`🚀 서버 실행 중: http://localhost:${PORT}`);
 });
