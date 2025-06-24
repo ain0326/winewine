@@ -18,7 +18,7 @@ app.post('/recommend', async (req, res) => {
 
     // 2. 회사 API에 요청
     const response = await axios.post(API_URL, {
-      message: userInput
+      input: userInput
     }, {
       headers: {
         'Authorization': `Bearer ${API_KEY}`,
