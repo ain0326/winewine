@@ -19,7 +19,7 @@ app.post('/recommend', async (req, res) => {
       prompt: userInput
     }, {
       headers: {
-        'Authorization': `Bearer ${API_KEY}`,
+        'Authorization': `Bearer ${app-9iqdLrxUu7tGS3BP9fz4xqqc}`,
         'Content-Type': 'application/json'
       }
     });
