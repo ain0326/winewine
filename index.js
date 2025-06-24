@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const app = express();
 app.use(express.json());
-app.post('/query', async (req, res) => {
+app.post('/recommend', async (req, res) => {
  try {
    const userInput = req.body.message;
    const response = await axios.post('https://gateway.ax.gsretail.com/ext/v1/ai', {
