@@ -5,7 +5,7 @@ app.use(express.json());
 app.post('/recommend', async (req, res) => {
  try {
    const userInput = req.body.message;
-   const response = await axios.post('https://miso.gsretail.com/chatList/P3AvpKEFnD7L7MPq/ai', {
+   const response = await axios.post('https://gateway.ax.gsretail.com/ext/v1', {
      prompt: userInput
    }, {
      headers: {
